@@ -1,6 +1,8 @@
 package com.jiangklijna.md
 
+import com.jiangklijna.md.common.Setting
 import com.jiangklijna.md.view.MainView
+import javafx.scene.image.Image
 import javafx.stage.Stage
 
 typealias FxApp = javafx.application.Application
@@ -9,6 +11,12 @@ class Application : FxApp() {
 
 	override fun start(primaryStage: Stage) {
 		primaryStage.scene = MainView.getScene()
+		primaryStage.title = Setting.title
+		primaryStage.minWidth = Setting.width
+		primaryStage.maxWidth = Setting.width
+		primaryStage.minHeight = Setting.height
+		primaryStage.maxHeight = Setting.height
+		primaryStage.icons.add(Image(Setting.LOGO_PATH))
 		primaryStage.show()
 	}
 
