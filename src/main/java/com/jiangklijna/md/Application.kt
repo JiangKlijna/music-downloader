@@ -10,13 +10,14 @@ typealias FxApp = javafx.application.Application
 class Application : FxApp() {
 
 	override fun start(primaryStage: Stage) {
-		primaryStage.scene = MainView.getScene()
 		primaryStage.title = Setting.title
 		primaryStage.minWidth = Setting.width
 		primaryStage.maxWidth = Setting.width
 		primaryStage.minHeight = Setting.height
 		primaryStage.maxHeight = Setting.height
+		primaryStage.isResizable = Setting.isResizable
 		primaryStage.icons.add(Image(Setting.LOGO_PATH))
+		primaryStage.scene = MainView.getScene()
 		primaryStage.show()
 	}
 
