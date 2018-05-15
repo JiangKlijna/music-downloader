@@ -8,4 +8,6 @@ object Setting {
 
 	const val LOGO_PATH = "/img/logo.png"
 	const val title = "Music Download"
+
+	const val logo_side_length = 80.0
 }
