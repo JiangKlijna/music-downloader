@@ -1,13 +1,13 @@
 buildscript {
-	ext {
-		kotlin_version = '1.2.40'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-	}
+    ext {
+        kotlin_version = '1.2.40'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
 }
 
 apply plugin: 'java'
@@ -18,34 +18,51 @@ version '0.1'
 sourceCompatibility = 1.8
 
 jar {
-	manifest {
-		attributes 'Main-Class': 'com.jiangklijna.md.Application'
-	}
-	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    manifest {
+        attributes 'Main-Class': 'com.jiangklijna.md.Application'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 //	into('lib') {from configurations.runtime}
 }
 
 repositories {
 //	mavenCentral()
-	maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-	compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-	compile "com.squareup.okhttp3:okhttp:3.10.0"
-	compile "org.dom4j:dom4j:2.1.0"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    compile "com.squareup.okhttp3:okhttp:3.10.0"
+    compile "org.dom4j:dom4j:2.1.0"
 
-	testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
 compileKotlin {
-	kotlinOptions {
-		jvmTarget = "1.8"
-	}
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 compileTestKotlin {
-	kotlinOptions {
-		jvmTarget = "1.8"
-	}
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+task push {
+    def out = { String line -> println(line) }
+    def runtime = Runtime.runtime
+    def exec = { String cmd ->
+        def p = runtime.exec(cmd)
+        def buf = new BufferedInputStream(p.errorStream)
+        buf.readLines().forEach(out)
+        buf.close()
+        p.destroy()
+    }
+    doLast {
+        exec("git add .")
+        exec("git commit -m \"" + new Date() + "\"")
+        exec("git push")
+    }
 }
