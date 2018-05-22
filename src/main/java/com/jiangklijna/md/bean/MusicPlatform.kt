@@ -1,6 +1,6 @@
 package com.jiangklijna.md.bean
 
-enum class MusicPlatForm(val title: String) {
+enum class MusicPlatform(val title: String) {
 	wy("网易音乐"),
 	xm("虾米音乐"),
 	qq("qq音乐"),
