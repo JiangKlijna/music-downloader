@@ -23,15 +23,8 @@ object Http {
 
 	fun post(url: String, cb: Callback) = client.newCall(Request.Builder().url(url).addHeader("User-Agent", UserAgent).post(EmptyBody()).build()).enqueue(cb)
 
-	// 回调
-	interface Runnable<T> {
-		fun run(data: T)
-	}
-
 	// 通过EventBus 将网络请求的回调运行在ui线程
 	class Event<T>(val data: T, val run: (T) -> Unit) {
-
-		fun send() = bus.post(this)
 
 		@Subscribe(threadMode = ThreadMode.MAIN)
 		fun onEvent(o: Any) {
@@ -41,6 +34,7 @@ object Http {
 
 		init {
 			bus.register(this)
+			bus.post(this)
 		}
 	}
 
