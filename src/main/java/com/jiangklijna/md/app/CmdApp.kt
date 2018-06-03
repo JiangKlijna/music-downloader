@@ -15,6 +15,10 @@ class CmdApp {
 		cmds.first().print()
 	}
 
+	fun back() {
+		
+	}
+
 	companion object {
 		val run = { CmdApp().start() }
 	}

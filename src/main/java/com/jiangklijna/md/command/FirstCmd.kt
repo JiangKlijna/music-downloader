@@ -14,4 +14,10 @@ class FirstCmd(val app: CmdApp) : BaseCmd {
 		val list = platform.search(key)
 		list.forEachIndexed { index, music -> println(music) }
 	}
+
+	override fun analysis(key: String): () -> Unit {
+		if (key == ":back") return app::back
+		else
+			return {}
+	}
 }
