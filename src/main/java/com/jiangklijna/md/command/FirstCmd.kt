@@ -9,9 +9,13 @@ class FirstCmd(val app: CmdApp) : BaseCmd {
 
 	var platform: MusicPlatform = MusicPlatform.wy
 
+	override fun work() {
+		print()
+		analysis(app.command)()
+	}
+
 	override fun print() {
 		println(platform.title + "搜索:(:)")
-		analysis(app.command)()
 	}
 
 	override fun analysis(key: String): () -> Unit {

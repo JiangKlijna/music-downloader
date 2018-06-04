@@ -13,7 +13,7 @@ class CmdApp {
 
 	fun start() {
 		level = 0
-		cmds.first().print()
+		cmds.first().work()
 	}
 
 	fun back() {
