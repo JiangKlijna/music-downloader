@@ -10,8 +10,7 @@ class SecondCmd(val app: CmdApp) : BaseCmd {
 
 	override fun print() {
 		println(platform.title + "搜索:(:)")
-		val key = app.cmd.next()
-		val list = platform.search(key)
+		val list = platform.search(app.command)
 		list.forEachIndexed { index, music -> println(music) }
 	}
 

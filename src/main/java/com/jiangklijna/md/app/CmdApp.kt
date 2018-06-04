@@ -8,7 +8,8 @@ class CmdApp {
 
 	var level = 0
 	val cmds = arrayOf(FirstCmd(this), SecondCmd(this))
-	val cmd = Scanner(System.`in`)
+	val command: String
+		get() = scanner.next()
 
 	fun start() {
 		level = 0
@@ -16,10 +17,12 @@ class CmdApp {
 	}
 
 	fun back() {
-		
+
 	}
+
 
 	companion object {
 		val run = { CmdApp().start() }
+		val scanner = Scanner(System.`in`)
 	}
 }
