@@ -32,7 +32,7 @@ class FirstCmd(val app: CmdApp) : BaseCmd {
 				work()
 			})
 			else -> ({
-				app.onSearchCallBack(platform.search(key))
+				platform.search(key, app::onSearchCallBack)
 			})
 		}
 	}

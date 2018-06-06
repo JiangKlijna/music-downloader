@@ -29,7 +29,7 @@ class CmdApp {
 	}
 
 	fun onSearchCallBack(list: List<Music>) {
-
+		if (list.isEmpty()) return;
 	}
 
 	companion object {
