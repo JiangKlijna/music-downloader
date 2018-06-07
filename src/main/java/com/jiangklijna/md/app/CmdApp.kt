@@ -29,7 +29,8 @@ class CmdApp {
 	}
 
 	fun onSearchCallBack(list: List<Music>) {
-		if (list.isEmpty()) return;
+		if (list.isEmpty()) return first.work()
+		second.work(list)
 	}
 
 	companion object {
