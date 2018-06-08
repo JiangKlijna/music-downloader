@@ -7,7 +7,6 @@ import java.util.*
 
 class CmdApp {
 
-	var level = 0
 	val command: String
 		get() = scanner.next()
 
@@ -15,7 +14,6 @@ class CmdApp {
 	val second = SecondCmd(this)
 
 	fun start() {
-		level = 0
 		println("音乐下载器, 输入:exit退出")
 		first.work()
 	}
@@ -28,9 +26,8 @@ class CmdApp {
 		System.exit(0)
 	}
 
-	fun onSearchCallBack(list: List<Music>) {
-		if (list.isEmpty()) return first.work()
-		second.work(list)
+	fun onMusicCallBack(music: Music) {
+		second.work(music)
 	}
 
 	companion object {

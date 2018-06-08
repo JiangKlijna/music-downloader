@@ -1,9 +1,11 @@
 package com.jiangklijna.md.command
 
 import com.jiangklijna.md.app.CmdApp
+import com.jiangklijna.md.bean.Music
 import com.jiangklijna.md.bean.MusicPlatform
 import com.jiangklijna.md.common.Logic.search
 
+// 选出一个Music
 class FirstCmd(val app: CmdApp) : BaseCmd {
 
 	var platform: MusicPlatform = MusicPlatform.wy
@@ -32,8 +34,12 @@ class FirstCmd(val app: CmdApp) : BaseCmd {
 				work()
 			})
 			else -> ({
-				platform.search(key, app::onSearchCallBack)
+				platform.search(key, onSearchCallBack)
 			})
 		}
+	}
+
+	val onSearchCallBack = { list: List<Music> ->
+
 	}
 }

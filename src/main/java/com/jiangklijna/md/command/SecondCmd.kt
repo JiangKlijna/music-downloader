@@ -2,19 +2,19 @@ package com.jiangklijna.md.command
 
 import com.jiangklijna.md.app.CmdApp
 import com.jiangklijna.md.bean.Music
-import java.util.*
 
+// 选出一个MusicItem
 class SecondCmd(val app: CmdApp) : BaseCmd {
 
-	val list: LinkedList<Music> = LinkedList()
+	var music: Music? = null
 
-	fun work(list: List<Music>) {
-		this.list.clear()
-		this.list.addAll(list)
+	fun work(m: Music) {
+		music = m
 		work()
 	}
 
 	override fun work() {
+		music ?: return
 		print()
 		analysis(app.command)()
 	}
