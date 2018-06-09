@@ -1,18 +1,18 @@
 package com.jiangklijna.md.command
 
 import com.jiangklijna.md.app.CmdApp
-import com.jiangklijna.md.bean.Music
+import com.jiangklijna.md.bean.MusicItem
 
-// 选出一个MusicItem
-class SecondCmd(val cmdApp: CmdApp) : BaseCmd {
+// 下载一个MusicItem
+class ThirdCmd(val cmdApp: CmdApp) : BaseCmd {
 
 	override val app: CmdApp
 		get() = cmdApp
 
-	var music: Music? = null
+	var item: MusicItem? = null
 
-	fun work(m: Music) {
-		music = m
+	fun work(mi: MusicItem) {
+		item = mi
 		work()
 	}
 

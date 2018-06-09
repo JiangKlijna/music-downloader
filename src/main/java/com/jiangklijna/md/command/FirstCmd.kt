@@ -6,14 +6,12 @@ import com.jiangklijna.md.bean.MusicPlatform
 import com.jiangklijna.md.common.Logic.search
 
 // 选出一个Music
-class FirstCmd(val app: CmdApp) : BaseCmd {
+class FirstCmd(val cmdApp: CmdApp) : BaseCmd {
+
+	override val app: CmdApp
+		get() = cmdApp
 
 	var platform: MusicPlatform = MusicPlatform.wy
-
-	override fun work() {
-		print()
-		analysis(app.command)()
-	}
 
 	override fun print() {
 		println("当前选择的是${platform.title}, 输入:[id]切换音乐平台\n" +
@@ -41,5 +39,8 @@ class FirstCmd(val app: CmdApp) : BaseCmd {
 
 	val onSearchCallBack = { list: List<Music> ->
 
+	}
+
+	override fun destory() {
 	}
 }
