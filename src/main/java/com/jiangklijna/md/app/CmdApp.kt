@@ -23,6 +23,7 @@ class CmdApp {
 	}
 
 	fun stop() {
+		System.gc()
 		System.exit(0)
 	}
 

@@ -8,15 +8,15 @@ import java.io.File
 object Logic {
 
 
-	inline fun MusicPlatform.search(key: String, cb: (List<Music>) -> Unit, isAsync: Boolean = true) {
+	inline fun MusicPlatform.search(key: String, pageNum: Int, cb: (List<Music>?) -> Unit, isAsync: Boolean = true) {
 
 	}
 
-	inline fun Music.findItem(cb: (List<MusicItem>) -> Unit, isAsync: Boolean = true) {
+	inline fun Music.findItem(cb: (List<MusicItem>?) -> Unit, isAsync: Boolean = true) {
 
 	}
 
-	inline fun MusicItem.download(file: File, cb: (Int) -> Unit, isAsync: Boolean = true) {
+	inline fun MusicItem.download(file: File, cb: (Int?) -> Unit, isAsync: Boolean = true) {
 
 	}
 

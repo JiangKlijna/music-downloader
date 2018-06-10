@@ -6,8 +6,8 @@ interface BaseCmd {
 
 	val app: CmdApp
 
-	fun work() {
-		print()
+	fun work(isPrint: Boolean = true) {
+		if (isPrint) print()
 		analysis(app.command)()
 	}
 
