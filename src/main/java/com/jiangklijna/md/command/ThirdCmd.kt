@@ -13,7 +13,6 @@ class ThirdCmd(val cmdApp: CmdApp) : BaseCmd {
 
 	fun work(mi: MusicItem) {
 		item = mi
-		work()
 	}
 
 	override fun print() {
@@ -29,6 +28,6 @@ class ThirdCmd(val cmdApp: CmdApp) : BaseCmd {
 	}
 
 	override fun destory() {
-
+		item = null
 	}
 }

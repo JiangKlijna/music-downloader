@@ -2,6 +2,8 @@ package com.jiangklijna.md.command
 
 import com.jiangklijna.md.app.CmdApp
 import com.jiangklijna.md.bean.Music
+import com.jiangklijna.md.bean.MusicItem
+import com.jiangklijna.md.common.Logic.findItem
 
 // 选出一个MusicItem
 class SecondCmd(val cmdApp: CmdApp) : BaseCmd {
@@ -13,7 +15,7 @@ class SecondCmd(val cmdApp: CmdApp) : BaseCmd {
 
 	fun work(m: Music) {
 		music = m
-		work()
+		m.findItem(callback)
 	}
 
 	override fun print() {
@@ -28,7 +30,11 @@ class SecondCmd(val cmdApp: CmdApp) : BaseCmd {
 		}
 	}
 
-	override fun destory() {
+	val callback = { list: List<MusicItem>? ->
+		work()
+	}
 
+	override fun destory() {
+		music = null
 	}
 }
