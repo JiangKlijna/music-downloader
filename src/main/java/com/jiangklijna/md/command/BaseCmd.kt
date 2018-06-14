@@ -13,7 +13,7 @@ interface BaseCmd {
 
 	fun print()
 
-	fun analysis(key: String): () -> Unit
+	fun analysis(key: String): () -> Unit?
 
 	fun destory()
 }

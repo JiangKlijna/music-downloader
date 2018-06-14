@@ -30,7 +30,7 @@ object Logic {
 	}(this, cb, isAsync)
 
 	// 下载一个MusicItem
-	fun MusicItem.download(file: File, cb: (Int?) -> Unit, isAsync: Boolean = true) {
+	fun MusicItem.download(cb: (Int?) -> Unit, isAsync: Boolean = true) {
 		cb(null)
 	}
 
