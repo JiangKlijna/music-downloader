@@ -19,8 +19,8 @@ class ThirdCmd(val cmdApp: CmdApp) : BaseCmd {
 	override fun print() {
 		println("正在下载${item?.music?.name}...\n" +
 				"输入:again 可以在失败后再次下载\n" +
-				"输入:exit退出当前程序\n" +
-				"输入:back返回上次级\n")
+				"输入:exit 退出当前程序\n" +
+				"输入:back 返回上次级\n")
 	}
 
 	override fun analysis(key: String): () -> Unit? {
@@ -28,18 +28,26 @@ class ThirdCmd(val cmdApp: CmdApp) : BaseCmd {
 			":exit" -> app::stop
 			":back" -> app::back
 			":again" -> this::download
-			else -> ({})
+			else -> ({ work(false) })
 		}
 	}
 
 	fun download() = item?.download(this::onProgress)
 
 	fun downloadFailure() {
-
+		println("下载失败...\n" +
+				"输入:again 可以在失败后再次下载\n" +
+				"输入:exit 退出当前程序\n" +
+				"输入:back 返回上次级\n")
+		work(false)
 	}
 
 	fun downloadSuccess() {
-
+		println("下载成功...\n" +
+				"输入:again 可以在失败后再次下载\n" +
+				"输入:exit 退出当前程序\n" +
+				"输入:back 返回上次级\n")
+		work(false)
 	}
 
 	fun onProgress(i: Int?) {
