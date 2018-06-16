@@ -1,6 +1,5 @@
-package com.jiangklijna.md
+package com.jiangklijna.md.common
 
-import com.jiangklijna.md.common.Http
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
