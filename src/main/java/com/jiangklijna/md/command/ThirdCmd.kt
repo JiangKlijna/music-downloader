@@ -26,7 +26,7 @@ class ThirdCmd(val cmdApp: CmdApp) : BaseCmd {
 	override fun analysis(key: String): () -> Unit? {
 		return when (key) {
 			":exit" -> app::stop
-			":back" -> app::back
+			":back" -> this::back
 			":again" -> this::download
 			else -> ({ work(false) })
 		}
@@ -55,6 +55,8 @@ class ThirdCmd(val cmdApp: CmdApp) : BaseCmd {
 		if (i % 5 == 0) print("*")
 		if (i == 100) downloadSuccess()
 	}
+
+	override fun back() = app.goto(this, app.second)
 
 	override fun destory() {
 		item = null

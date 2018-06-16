@@ -15,5 +15,7 @@ interface BaseCmd {
 
 	fun analysis(key: String): () -> Unit?
 
+	fun back()
+
 	fun destory()
 }

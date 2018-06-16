@@ -31,6 +31,7 @@ class FirstCmd(val cmdApp: CmdApp) : BaseCmd {
 	override fun analysis(key: String): () -> Unit {
 		return when (key) {
 			":exit" -> app::stop
+			":back" -> this::back
 			":prev" -> ({
 				work(isPrint = false)
 			})
@@ -50,6 +51,8 @@ class FirstCmd(val cmdApp: CmdApp) : BaseCmd {
 	val onSearchCallBack = { list: List<Music>? ->
 
 	}
+
+	override fun back() = app.stop()
 
 	override fun destory() {
 		pageNum = 1

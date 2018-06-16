@@ -2,6 +2,7 @@ package com.jiangklijna.md.app
 
 import com.jiangklijna.md.bean.Music
 import com.jiangklijna.md.bean.MusicItem
+import com.jiangklijna.md.command.BaseCmd
 import com.jiangklijna.md.command.FirstCmd
 import com.jiangklijna.md.command.SecondCmd
 import com.jiangklijna.md.command.ThirdCmd
@@ -21,10 +22,6 @@ class CmdApp {
 		first.work()
 	}
 
-	fun back() {
-
-	}
-
 	fun stop() {
 		System.gc()
 		System.exit(0)
@@ -38,6 +35,11 @@ class CmdApp {
 	fun onMusicItemCallBack(item: MusicItem) {
 		third.work(item)
 		third.destory()
+	}
+
+	fun goto(from: BaseCmd, to: BaseCmd) {
+		to.work()
+		from.destory()
 	}
 
 	companion object {

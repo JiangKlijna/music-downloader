@@ -25,7 +25,7 @@ class SecondCmd(val cmdApp: CmdApp) : BaseCmd {
 	override fun analysis(key: String): () -> Unit {
 		return when (key) {
 			":exit" -> app::stop
-			":back" -> app::back
+			":back" -> this::back
 			else -> ({})
 		}
 	}
@@ -33,6 +33,8 @@ class SecondCmd(val cmdApp: CmdApp) : BaseCmd {
 	val callback = { list: List<MusicItem>? ->
 		work()
 	}
+
+	override fun back() = app.goto(this, app.first)
 
 	override fun destory() {
 		music = null
