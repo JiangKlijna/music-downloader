@@ -7,5 +7,5 @@ enum class MusicPlatform(val title: String) {
 	bd("百度音乐"),
 	kg("酷狗音乐");
 
-	val path: String = "img/$name.png"
+	val path: String = "/img/$name.png"
 }
