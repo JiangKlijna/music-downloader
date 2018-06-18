@@ -1,5 +1,7 @@
 package com.jiangklijna.md.common
 
+import java.util.*
+
 object Function {
 
 	fun Any?.println() = println(this)
@@ -17,4 +19,6 @@ object Function {
 	inline fun <reified T> Any.safeCast(action: T.() -> Unit) {
 		if (this is T) this.action()
 	}
+
+	fun <T> Array<T>.random(): T = this[Random().nextInt(size)]
 }
