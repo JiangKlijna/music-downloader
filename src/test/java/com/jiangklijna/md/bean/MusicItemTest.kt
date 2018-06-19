@@ -3,33 +3,33 @@ package com.jiangklijna.md.bean
 import org.junit.Assert
 import org.junit.Test
 import java.util.concurrent.atomic.AtomicInteger
-import com.jiangklijna.md.common.Function.random
+import java.util.*
 
-class MusicTest {
+class MusicItemTest {
 
 	companion object {
 		val i = AtomicInteger(0)
 
-		val fakeMusic: Music
-			get() = Music(
+		val fakeMusicItem: MusicItem
+			get() = MusicItem(
 					name = "fake${i.getAndIncrement()}",
-					author = "faker${i.getAndIncrement()}",
-					platform = MusicPlatform.values().random(),
-					infoUrl = "http://fake${i.getAndIncrement()}.com"
+					realUrl = "http://fake${i.getAndIncrement()}.com",
+					isMv = Random().nextBoolean(),
+					music = MusicTest.fakeMusic
 			)
 	}
 
 	@Test
 	fun equalsTest() {
-		Assert.assertNotEquals(fakeMusic, fakeMusic)
-		fakeMusic.let {
+		Assert.assertNotEquals(fakeMusicItem, fakeMusicItem)
+		fakeMusicItem.let {
 			Assert.assertTrue(it == it.copy())
 		}
 	}
 
 	@Test
 	fun hashcodeTest() {
-		fakeMusic.let {
+		fakeMusicItem.let {
 			Assert.assertEquals(it.hashCode(), it.copy().hashCode())
 		}
 	}
