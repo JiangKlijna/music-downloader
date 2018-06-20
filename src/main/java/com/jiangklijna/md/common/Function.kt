@@ -4,6 +4,8 @@ import java.util.*
 
 object Function {
 
+	val r = Random()
+
 	fun Any?.println() = println(this)
 
 	inline fun Boolean.iftrue(f: () -> Unit): Boolean {
@@ -20,5 +22,8 @@ object Function {
 		if (this is T) this.action()
 	}
 
-	fun <T> Array<T>.random(): T = this[Random().nextInt(size)]
+	fun <T> Array<T>.random(): T = this[r.nextInt(size)]
+
+	inline fun <T> Array<T>.random(f: (T) -> Unit) = f(this[r.nextInt(size)])
+
 }
