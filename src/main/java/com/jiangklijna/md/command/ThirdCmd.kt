@@ -36,7 +36,7 @@ class ThirdCmd(val cmdApp: CmdApp) : BaseCmd {
 
 	fun downloadFailure() {
 		println("下载失败...\n" +
-				"输入:again 可以在失败后再次下载\n" +
+				"输入:again 重新下载\n" +
 				"输入:exit 退出当前程序\n" +
 				"输入:back 返回上次级\n")
 		work(false)
@@ -44,7 +44,7 @@ class ThirdCmd(val cmdApp: CmdApp) : BaseCmd {
 
 	fun downloadSuccess() {
 		println("下载成功...\n" +
-				"输入:again 可以在失败后再次下载\n" +
+				"输入:again 重新下载\n" +
 				"输入:exit 退出当前程序\n" +
 				"输入:back 返回上次级\n")
 		work(false)

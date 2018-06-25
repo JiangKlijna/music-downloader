@@ -1,16 +1,29 @@
 package com.jiangklijna.md.command
 
 import com.jiangklijna.md.app.CmdApp
-import org.junit.Assert
+import com.jiangklijna.md.bean.MusicItemTest
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 
 class ThirdCmdTest {
 
-	val app = CmdApp()
+	val third = CmdApp().third
 
-	@Test
-	fun get() {
-//		Assert.assertTrue()
+	@Before
+	fun init() {
+		third.work(MusicItemTest.fakeMusicItem)
+		third.print()
 	}
 
+	@Test
+	fun download() {
+		third.analysis(":again")()
+	}
+
+	@After
+	fun destory() {
+		third.destory()
+		third.analysis(":exit")()
+	}
 }
