@@ -11,20 +11,20 @@ class HttpTest {
 
 	@Test
 	fun get() {
-		val res = Http.get("http://baidu.com")
+		val res = Http.getCall("http://baidu.com").execute()
 		Assert.assertTrue(res.isSuccessful)
 	}
 
 	@Test
 	fun post() {
-		val res = Http.post("http://baidu.com")
+		val res = Http.postCall("http://baidu.com").execute()
 		Assert.assertTrue(res.isSuccessful)
 	}
 
 	@Test
-	fun get_callback() {
+	fun get_async() {
 		val testThread = Thread.currentThread()
-		val res = Http.get("http://baidu.com", object : Callback {
+		Http.get("http://baidu.com", object : Callback {
 			override fun onFailure(call: Call?, e: IOException?) {
 				Assert.fail(e?.message)
 			}
@@ -33,7 +33,17 @@ class HttpTest {
 				Assert.assertNotEquals(Thread.currentThread(), testThread)
 				Assert.assertTrue(response.isSuccessful)
 			}
-		})
+		}, true)
+		Http.get("http://baidu.com", object : Callback {
+			override fun onFailure(call: Call?, e: IOException?) {
+				Assert.fail(e?.message)
+			}
+
+			override fun onResponse(call: Call?, response: Response) {
+				Assert.assertEquals(Thread.currentThread(), testThread)
+				Assert.assertTrue(response.isSuccessful)
+			}
+		}, false)
 		Thread.sleep(1000)
 	}
 
