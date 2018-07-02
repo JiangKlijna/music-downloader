@@ -1,7 +1,7 @@
 package com.jiangklijna.md.common
 
 object R {
-    object url {
+    object Url {
         /**
          * @s
          */
@@ -25,5 +25,17 @@ object R {
          * @searchKeyWord
          */
         const val KG_SEARCH = "http://www.kugou.com/yy/html/search.html#searchType=song"
+    }
+
+    object Setting {
+
+        const val width = 800.0
+        const val height = 800.0
+        const val isResizable = false
+
+        const val LOGO_PATH = "/img/logo.png"
+        const val title = "Music Download"
+
+        const val logo_side_length = 80.0
     }
 }

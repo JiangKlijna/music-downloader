@@ -1,12 +1,10 @@
 package com.jiangklijna.md.app
 
-import com.jiangklijna.md.common.Setting
+import com.jiangklijna.md.common.R.Setting
 import com.jiangklijna.md.view.MainView
 import javafx.application.Application
 import javafx.scene.image.Image
 import javafx.stage.Stage
-
-//typealias FxApp = javafx.application.Application
 
 class FxApp : Application() {
 
