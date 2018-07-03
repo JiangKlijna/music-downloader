@@ -5,7 +5,7 @@ object R {
         /**
          * @s
          */
-        const val WY_SEARCH = "http://music.163.com/#/search/m/?s="
+        const val WY_SEARCH = "http://music.163.com/#/search/m/"
         /**
          * @key
          * resetful page

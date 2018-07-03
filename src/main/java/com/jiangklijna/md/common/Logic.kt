@@ -3,10 +3,12 @@ package com.jiangklijna.md.common
 import com.jiangklijna.md.bean.Music
 import com.jiangklijna.md.bean.MusicItem
 import com.jiangklijna.md.bean.MusicPlatform
-import java.io.File
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Response
+import java.io.IOException
 
 object Logic {
-
 
 	// 在一个平台下搜索音乐
 	fun MusicPlatform.search(key: String, pageNum: Int, cb: (List<Music>?) -> Unit, isAsync: Boolean = true)
@@ -36,7 +38,10 @@ object Logic {
 
 	// 网易云音乐搜索
 	fun wy_search(key: String, pageNum: Int, cb: (List<Music>?) -> Unit, isAsync: Boolean = true) {
-		cb(null)
+		val callback = object : CallBack<List<Music>?>(cb) {
+			override fun onResponse(call: Call?, response: Response?) = cb(Resolve.wy_search(response))
+		}
+		Http.get("${R.Url.WY_SEARCH}?s=$key", callback, isAsync)
 	}
 
 	// 虾米音乐搜索
@@ -82,5 +87,9 @@ object Logic {
 	// 酷狗音乐搜索
 	fun kg_findItem(music: Music, cb: (List<MusicItem>?) -> Unit, isAsync: Boolean = true) {
 		cb(null)
+	}
+
+	abstract class CallBack<T>(val cb: (T?) -> Unit) : Callback {
+		override fun onFailure(call: Call?, e: IOException?) = cb(null)
 	}
 }
