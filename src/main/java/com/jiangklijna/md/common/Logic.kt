@@ -6,6 +6,7 @@ import com.jiangklijna.md.bean.MusicPlatform
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
+import java.io.File
 import java.io.IOException
 
 object Logic {
@@ -33,7 +34,12 @@ object Logic {
 
 	// 下载一个MusicItem
 	fun MusicItem.download(cb: (Int?) -> Unit, isAsync: Boolean = true) {
-		cb(null)
+		val callback = object : CallBack<Int?>(cb) {
+			override fun onResponse(call: Call?, response: Response?) {
+				response?.body()?.byteStream()
+			}
+		}
+		Http.get(this.realUrl, callback, isAsync)
 	}
 
 	// 网易云音乐搜索
