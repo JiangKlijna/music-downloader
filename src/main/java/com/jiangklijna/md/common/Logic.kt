@@ -46,22 +46,34 @@ object Logic {
 
 	// 虾米音乐搜索
 	fun xm_search(key: String, pageNum: Int, cb: (List<Music>?) -> Unit, isAsync: Boolean = true) {
-		cb(null)
+		val callback = object : CallBack<List<Music>?>(cb) {
+			override fun onResponse(call: Call?, response: Response?) = cb(Resolve.xm_search(response))
+		}
+		Http.get("${R.Url.XM_SEARCH}$pageNum?key=$key", callback, isAsync)
 	}
 
 	// qq音乐搜索
 	fun qq_search(key: String, pageNum: Int, cb: (List<Music>?) -> Unit, isAsync: Boolean = true) {
-		cb(null)
+		val callback = object : CallBack<List<Music>?>(cb) {
+			override fun onResponse(call: Call?, response: Response?) = cb(Resolve.qq_search(response))
+		}
+		Http.get("${R.Url.QQ_SEARCH}?w=$key&page=$pageNum", callback, isAsync)
 	}
 
 	// 百度音乐搜索
 	fun bd_search(key: String, pageNum: Int, cb: (List<Music>?) -> Unit, isAsync: Boolean = true) {
-		cb(null)
+		val callback = object : CallBack<List<Music>?>(cb) {
+			override fun onResponse(call: Call?, response: Response?) = cb(Resolve.bd_search(response))
+		}
+		Http.get("${R.Url.BD_SEARCH}?key=$key&start=${pageNum * 20}", callback, isAsync)
 	}
 
 	// 酷狗音乐搜索
 	fun kg_search(key: String, pageNum: Int, cb: (List<Music>?) -> Unit, isAsync: Boolean = true) {
-		cb(null)
+		val callback = object : CallBack<List<Music>?>(cb) {
+			override fun onResponse(call: Call?, response: Response?) = cb(Resolve.kg_search(response))
+		}
+		Http.get("${R.Url.KG_SEARCH}?searchKeyWord=$key", callback, isAsync)
 	}
 
 	// 网易云音乐搜索
