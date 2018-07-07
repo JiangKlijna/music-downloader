@@ -1,7 +1,7 @@
 package com.jiangklijna.md.view
 
 import com.jiangklijna.md.bean.MusicPlatform
-import com.jiangklijna.md.common.Setting.logo_side_length
+import com.jiangklijna.md.common.R.Setting.logo_side_length
 import javafx.scene.Cursor
 import javafx.scene.control.Label
 import javafx.scene.image.Image
