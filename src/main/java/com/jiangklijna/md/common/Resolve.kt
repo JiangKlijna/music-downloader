@@ -1,9 +1,10 @@
 package com.jiangklijna.md.common
 
 import com.jiangklijna.md.bean.Music
+import com.jiangklijna.md.bean.MusicPlatform
+import com.jiangklijna.md.common.Function.println
 import okhttp3.Response
 import org.jsoup.Jsoup
-import com.jiangklijna.md.common.Function.println
 
 // service
 object Resolve {
@@ -16,8 +17,18 @@ object Resolve {
 
 	fun xm_search(response: Response?): List<Music> {
 		val doc = response.getDocument()
-		doc.title().println()
-		return emptyList()
+		val table = doc.body().getElementsByClass("track_list").first()
+		val trs = table.getElementsByTag("tr").apply { removeAt(0) }
+		return List(trs.size, {
+			val tr = trs[it]
+			val song_name = tr.getElementsByClass("song_name").first();
+			Music(
+					name = song_name.text(),
+					author = tr.getElementsByClass("song_artist").first().text(),
+					platform = MusicPlatform.xm,
+					infoUrl = "http:" + song_name.getElementsByTag("a").attr("href")
+			)
+		})
 	}
 
 	fun qq_search(response: Response?): List<Music> {
