@@ -8,9 +8,8 @@ object R {
         const val WY_SEARCH = "http://music.163.com/#/search/m/"
         /**
          * @key
-         * resetful page
          */
-        const val XM_SEARCH = "http://www.xiami.com/search/song/page/"
+        const val XM_SEARCH = "https://www.xiami.com/search"
         /**
          * @w
          * @page
