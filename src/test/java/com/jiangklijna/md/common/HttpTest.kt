@@ -6,18 +6,19 @@ import okhttp3.Response
 import org.junit.Assert
 import org.junit.Test
 import java.io.IOException
+import java.net.URL
 
 class HttpTest {
 
 	@Test
 	fun get() {
-		val res = Http.getCall("http://baidu.com").execute()
+		val res = Http.getCall(URL("http://baidu.com")).execute()
 		Assert.assertTrue(res.isSuccessful)
 	}
 
 	@Test
 	fun post() {
-		val res = Http.postCall("http://baidu.com").execute()
+		val res = Http.postCall(URL("http://baidu.com")).execute()
 		Assert.assertTrue(res.isSuccessful)
 	}
 

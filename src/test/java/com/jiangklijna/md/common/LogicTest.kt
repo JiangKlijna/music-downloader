@@ -3,7 +3,7 @@ package com.jiangklijna.md.common
 import org.junit.Assert
 import org.junit.Test
 
-class LogicTest{
+class LogicTest {
 
 	@Test
 	fun wy_search() {
@@ -18,6 +18,7 @@ class LogicTest{
 		Logic.xm_search("abc", 1, {
 			Assert.assertNotNull(it!!)
 			Assert.assertFalse(it.isEmpty())
+			println(it)
 		}, false)
 	}
 
