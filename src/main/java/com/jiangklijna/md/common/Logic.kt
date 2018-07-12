@@ -71,7 +71,7 @@ object Logic {
 		val callback = object : CallBack<List<Music>?>(cb) {
 			override fun onResponse(call: Call?, response: Response?) = cb(Resolve.bd_search(response))
 		}
-		Http.get("${R.Url.BD_SEARCH}?key=$key&start=${pageNum * 20}", callback, isAsync)
+		Http.get("${R.Url.BD_SEARCH}?key=$key&start=${(pageNum - 1) * 20}", callback, isAsync)
 	}
 
 	// 酷狗音乐搜索

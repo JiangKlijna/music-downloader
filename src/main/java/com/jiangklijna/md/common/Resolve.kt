@@ -21,7 +21,7 @@ object Resolve {
 		val trs = table.getElementsByTag("tr").apply { removeAt(0) }
 		return List(trs.size, {
 			val tr = trs[it]
-			val song_name = tr.getElementsByClass("song_name").first();
+			val song_name = tr.getElementsByClass("song_name").first()
 			Music(
 					name = song_name.text(),
 					author = tr.getElementsByClass("song_artist").first().text(),
@@ -39,8 +39,18 @@ object Resolve {
 
 	fun bd_search(response: Response?): List<Music> {
 		val doc = response.getDocument()
-		doc.title().println()
-		return emptyList()
+		val div = doc.body().getElementById("result_container")
+		val lis = div.getElementsByClass("song-item-hook")
+		return List(lis.size, {
+			val li = lis[it]
+			val song_title = li.getElementsByClass("song-title").first()
+			Music(
+					name = song_title.text(),
+					author = li.getElementsByClass("singer").first().text(),
+					platform = MusicPlatform.bd,
+					infoUrl = "http://music.taihe.com" + song_title.getElementsByTag("a").attr("href")
+			)
+		})
 	}
 
 	fun kg_search(response: Response?): List<Music> {

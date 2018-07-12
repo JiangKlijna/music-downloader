@@ -35,6 +35,7 @@ class LogicTest {
 		Logic.bd_search("abc", 1, {
 			Assert.assertNotNull(it!!)
 			Assert.assertFalse(it.isEmpty())
+			println(it)
 		}, false)
 	}
 
