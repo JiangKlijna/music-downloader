@@ -79,7 +79,7 @@ object Logic {
 		val callback = object : CallBack<List<Music>?>(cb) {
 			override fun onResponse(call: Call?, response: Response?) = cb(Resolve.kg_search(response))
 		}
-		Http.get("${R.Url.KG_SEARCH}?searchKeyWord=$key", callback, isAsync)
+		Http.get("${R.Url.KG_SEARCH}keyword=$key&page=$pageNum", callback, isAsync)
 	}
 
 	// 网易云音乐搜索

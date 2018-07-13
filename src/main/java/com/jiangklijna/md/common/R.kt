@@ -21,9 +21,10 @@ object R {
          */
         const val BD_SEARCH = "http://music.taihe.com/search/song"
         /**
-         * @searchKeyWord
+         * @keyword
+         * @page
          */
-        const val KG_SEARCH = "http://www.kugou.com/yy/html/search.html#searchType=song"
+        const val KG_SEARCH = "http://songsearch.kugou.com/song_search_v2?pagesize=20&"
     }
 
     object Setting {
