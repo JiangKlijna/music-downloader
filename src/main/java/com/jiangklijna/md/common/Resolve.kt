@@ -54,13 +54,15 @@ object Resolve {
 	}
 
 	fun kg_search(response: Response?): List<Music> {
-		val doc = response.getDocument()
-		doc.title().println()
+		val doc = response.getJsonObject()
+		doc.println()
 		return emptyList()
 	}
 
 
 //	fun Response?.getDocument() = SAXReader().read(this?.body()?.byteStream())
+
+	fun Response?.getJsonObject() = R.Object.Jackson.readTree(this?.body()?.byteStream())
 
 	fun Response?.getDocument() = Jsoup.parse(this?.body()?.byteStream(), "utf-8", this?.request()?.url()?.toString())
 }
