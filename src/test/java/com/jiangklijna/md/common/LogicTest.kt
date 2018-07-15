@@ -44,6 +44,7 @@ class LogicTest {
 		Logic.kg_search("abc", 1, {
 			Assert.assertNotNull(it!!)
 			Assert.assertFalse(it.isEmpty())
+			println(it)
 		}, false)
 	}
 }

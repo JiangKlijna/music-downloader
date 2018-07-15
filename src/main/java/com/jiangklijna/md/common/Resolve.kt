@@ -54,9 +54,16 @@ object Resolve {
 	}
 
 	fun kg_search(response: Response?): List<Music> {
-		val doc = response.getJsonObject()
-		doc.println()
-		return emptyList()
+		val obj = response.getJsonObject()
+		if (obj["status"].asInt() != 1) return emptyList()
+		return obj["data"]["lists"].map {
+			Music(
+					name = it["SongName"].asText(),
+					author = it["SingerName"].asText(),
+					platform = MusicPlatform.kg,
+					infoUrl = it["ID"].asText()
+			)
+		}
 	}
 
 
