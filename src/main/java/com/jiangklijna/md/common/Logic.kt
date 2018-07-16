@@ -63,7 +63,7 @@ object Logic {
 		val callback = object : CallBack<List<Music>?>(cb) {
 			override fun onResponse(call: Call?, response: Response?) = cb(Resolve.qq_search(response))
 		}
-		Http.get("${R.Url.QQ_SEARCH}?w=$key&page=$pageNum", callback, isAsync)
+		Http.get("${R.Url.QQ_SEARCH}w=$key&p=$pageNum", callback, isAsync)
 	}
 
 	// 百度音乐搜索

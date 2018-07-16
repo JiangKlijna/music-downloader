@@ -32,8 +32,8 @@ object Resolve {
 	}
 
 	fun qq_search(response: Response?): List<Music> {
-		val doc = response.getDocument()
-		doc.title().println()
+		val obj = response.getJsonObject()
+		obj.println()
 		return emptyList()
 	}
 

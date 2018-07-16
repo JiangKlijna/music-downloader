@@ -18,9 +18,9 @@ object R {
 		const val XM_SEARCH = "https://www.xiami.com/search"
 		/**
 		 * @w
-		 * @page
+		 * @p
 		 */
-		const val QQ_SEARCH = "https://y.qq.com/portal/search.html#t=song"
+		const val QQ_SEARCH = "https://c.y.qq.com/soso/fcgi-bin/client_search_cp?format=json&n=20&"
 		/**
 		 * @key
 		 * @start = (page*20)
