@@ -9,67 +9,75 @@ import org.jsoup.Jsoup
 // service
 object Resolve {
 
-	fun wy_search(response: Response?): List<Music> {
-		val doc = response.getDocument()
-		doc.title().println()
-		return emptyList()
-	}
+    fun wy_search(response: Response?): List<Music> {
+        val doc = response.getDocument()
+        doc.title().println()
+        return emptyList()
+    }
 
-	fun xm_search(response: Response?): List<Music> {
-		val doc = response.getDocument()
-		val table = doc.body().getElementsByClass("track_list").first()
-		val trs = table.getElementsByTag("tr").apply { removeAt(0) }
-		return List(trs.size, {
-			val tr = trs[it]
-			val song_name = tr.getElementsByClass("song_name").first()
-			Music(
-					name = song_name.text(),
-					author = tr.getElementsByClass("song_artist").first().text(),
-					platform = MusicPlatform.xm,
-					infoUrl = "http:" + song_name.getElementsByTag("a").attr("href")
-			)
-		})
-	}
+    fun xm_search(response: Response?): List<Music> {
+        val doc = response.getDocument()
+        val table = doc.body().getElementsByClass("track_list").first()
+        val trs = table.getElementsByTag("tr").apply { removeAt(0) }
+        return List(trs.size, {
+            val tr = trs[it]
+            val song_name = tr.getElementsByClass("song_name").first()
+            Music(
+                    name = song_name.text(),
+                    author = tr.getElementsByClass("song_artist").first().text(),
+                    platform = MusicPlatform.xm,
+                    infoUrl = "http:" + song_name.getElementsByTag("a").attr("href")
+            )
+        })
+    }
 
-	fun qq_search(response: Response?): List<Music> {
-		val obj = response.getJsonObject()
-		obj.println()
-		return emptyList()
-	}
+    fun qq_search(response: Response?): List<Music> {
+        val obj = response.getJsonObject()
+        if (obj["code"].asInt() != 0) return emptyList()
+        return obj["data"]["song"]["list"].map {
 
-	fun bd_search(response: Response?): List<Music> {
-		val doc = response.getDocument()
-		val div = doc.body().getElementById("result_container")
-		val lis = div.getElementsByClass("song-item-hook")
-		return List(lis.size, {
-			val li = lis[it]
-			val song_title = li.getElementsByClass("song-title").first()
-			Music(
-					name = song_title.text(),
-					author = li.getElementsByClass("singer").first().text(),
-					platform = MusicPlatform.bd,
-					infoUrl = "http://music.taihe.com" + song_title.getElementsByTag("a").attr("href")
-			)
-		})
-	}
+            Music(
+                    name = it["songname"].asText(),
+                    author = it["singer"][0]["name"].asText(),
+                    platform = MusicPlatform.qq,
+                    infoUrl = it["songid"].asText()
+            )
+        }
+    }
 
-	fun kg_search(response: Response?): List<Music> {
-		val obj = response.getJsonObject()
-		if (obj["status"].asInt() != 1) return emptyList()
-		return obj["data"]["lists"].map {
-			Music(
-					name = it["SongName"].asText(),
-					author = it["SingerName"].asText(),
-					platform = MusicPlatform.kg,
-					infoUrl = it["ID"].asText()
-			)
-		}
-	}
+    fun bd_search(response: Response?): List<Music> {
+        val doc = response.getDocument()
+        val div = doc.body().getElementById("result_container")
+        val lis = div.getElementsByClass("song-item-hook")
+        return List(lis.size, {
+            val li = lis[it]
+            val song_title = li.getElementsByClass("song-title").first()
+            Music(
+                    name = song_title.text(),
+                    author = li.getElementsByClass("singer").first().text(),
+                    platform = MusicPlatform.bd,
+                    infoUrl = "http://music.taihe.com" + song_title.getElementsByTag("a").attr("href")
+            )
+        })
+    }
+
+    fun kg_search(response: Response?): List<Music> {
+        val obj = response.getJsonObject()
+        if (obj["status"].asInt() != 1) return emptyList()
+        return obj["data"]["lists"].map {
+            Music(
+                    name = it["SongName"].asText(),
+                    author = it["SingerName"].asText(),
+                    platform = MusicPlatform.kg,
+                    infoUrl = it["ID"].asText()
+            )
+        }
+    }
 
 
 //	fun Response?.getDocument() = SAXReader().read(this?.body()?.byteStream())
 
-	fun Response?.getJsonObject() = R.Object.Jackson.readTree(this?.body()?.byteStream())
+    fun Response?.getJsonObject() = R.Object.Jackson.readTree(this?.body()?.byteStream())
 
-	fun Response?.getDocument() = Jsoup.parse(this?.body()?.byteStream(), "utf-8", this?.request()?.url()?.toString())
+    fun Response?.getDocument() = Jsoup.parse(this?.body()?.byteStream(), "utf-8", this?.request()?.url()?.toString())
 }
