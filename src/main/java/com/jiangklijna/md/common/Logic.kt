@@ -55,7 +55,7 @@ object Logic {
 		val callback = object : CallBack<List<Music>?>(cb) {
 			override fun onResponse(call: Call?, response: Response?) = cb(Resolve.xm_search(response))
 		}
-		Http.get("${R.Url.XM_SEARCH}?key=$key", callback, isAsync)
+		Http.get("${R.Url.XM_SEARCH}$pageNum?key=$key", callback, isAsync)
 	}
 
 	// qq音乐搜索

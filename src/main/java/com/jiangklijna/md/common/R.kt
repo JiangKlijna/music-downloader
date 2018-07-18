@@ -14,8 +14,9 @@ object R {
 		const val WY_SEARCH = "http://music.163.com/#/search/m/"
 		/**
 		 * @key
+		 * restful @p
 		 */
-		const val XM_SEARCH = "https://www.xiami.com/search"
+		const val XM_SEARCH = "https://www.xiami.com/search/song/page/"
 		/**
 		 * @w
 		 * @p
