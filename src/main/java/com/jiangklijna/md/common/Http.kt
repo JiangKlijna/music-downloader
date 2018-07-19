@@ -19,7 +19,7 @@ object Http {
 
 	fun getCall(url: URL) = client.newCall(Request.Builder().url(url).addHeader("User-Agent", UserAgent).addHeader("HOST", url.host).get().build())
 
-	fun postCall(url: URL) = client.newCall(Request.Builder().url(url).addHeader("User-Agent", UserAgent).addHeader("HOST", url.host).post(EmptyBody()).build())
+	fun postCall(url: URL, body: RequestBody = EmptyBody()) = client.newCall(Request.Builder().url(url).addHeader("User-Agent", UserAgent).addHeader("HOST", url.host).post(body).build())
 
 	fun get(url: String, cb: Callback, isAsync: Boolean = true) = getCall(URL(url)).go(cb, isAsync)
 
