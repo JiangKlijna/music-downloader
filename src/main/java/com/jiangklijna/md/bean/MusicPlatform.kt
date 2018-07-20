@@ -8,4 +8,6 @@ enum class MusicPlatform(val title: String) {
 	kg("酷狗音乐");
 
 	val path: String = "/img/$name.png"
+
+	override fun toString() = title
 }

@@ -40,7 +40,7 @@ object Logic {
 			override fun onResponse(call: Call?, response: Response?) {
 				val body = response?.body() ?: return cb(-1)
 				val source = Okio.buffer(body.source() ?: return cb(-1))
-				val sink = Okio.buffer(Okio.sink(File("")))
+				val sink = Okio.buffer(Okio.sink(getFile()))
 				val contentLength = body.contentLength()
 				var currentBytes = 0L
 				val buf = Buffer()
