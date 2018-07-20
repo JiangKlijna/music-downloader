@@ -6,6 +6,8 @@ import com.jiangklijna.md.bean.MusicPlatform
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
+import okio.Buffer
+import okio.Okio
 import java.io.File
 import java.io.IOException
 
@@ -36,7 +38,22 @@ object Logic {
 	fun MusicItem.download(cb: (Int?) -> Unit, isAsync: Boolean = true) {
 		val callback = object : CallBack<Int?>(cb) {
 			override fun onResponse(call: Call?, response: Response?) {
-				response?.body()?.byteStream()
+				val body = response?.body() ?: return cb(-1)
+				val source = Okio.buffer(body.source() ?: return cb(-1))
+				val sink = Okio.buffer(Okio.sink(File("")))
+				val contentLength = body.contentLength()
+				var currentBytes = 0L
+				val buf = Buffer()
+				while (true) {
+					val i = source.read(buf, 2048L)
+					if (i == -1L) break
+					sink.write(buf, i)
+					sink.flush()
+					currentBytes += i
+					cb((currentBytes * 100L / contentLength).toInt())
+				}
+				source.close()
+				sink.close()
 			}
 		}
 		Http.get(this.realUrl, callback, isAsync)
